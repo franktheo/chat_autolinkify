@@ -1,0 +1,34 @@
+              Prefix Verb   URI Pattern                                       Controller#Action
+             session POST   /session(.:format)                                sessions#create
+         new_session GET    /session/new(.:format)                            sessions#new
+        edit_session GET    /session/edit(.:format)                           sessions#edit
+                     GET    /session(.:format)                                sessions#show
+                     PATCH  /session(.:format)                                sessions#update
+                     PUT    /session(.:format)                                sessions#update
+                     DELETE /session(.:format)                                sessions#destroy
+            examples GET    /examples(.:format)                               examples#index
+                     POST   /examples(.:format)                               examples#create
+         new_example GET    /examples/new(.:format)                           examples#new
+        edit_example GET    /examples/:id/edit(.:format)                      examples#edit
+             example GET    /examples/:id(.:format)                           examples#show
+                     PATCH  /examples/:id(.:format)                           examples#update
+                     PUT    /examples/:id(.:format)                           examples#update
+                     DELETE /examples/:id(.:format)                           examples#destroy
+    message_comments GET    /messages/:message_id/comments(.:format)          comments#index
+                     POST   /messages/:message_id/comments(.:format)          comments#create
+ new_message_comment GET    /messages/:message_id/comments/new(.:format)      comments#new
+edit_message_comment GET    /messages/:message_id/comments/:id/edit(.:format) comments#edit
+     message_comment GET    /messages/:message_id/comments/:id(.:format)      comments#show
+                     PATCH  /messages/:message_id/comments/:id(.:format)      comments#update
+                     PUT    /messages/:message_id/comments/:id(.:format)      comments#update
+                     DELETE /messages/:message_id/comments/:id(.:format)      comments#destroy
+            messages GET    /messages(.:format)                               messages#index
+                     POST   /messages(.:format)                               messages#create
+         new_message GET    /messages/new(.:format)                           messages#new
+        edit_message GET    /messages/:id/edit(.:format)                      messages#edit
+             message GET    /messages/:id(.:format)                           messages#show
+                     PATCH  /messages/:id(.:format)                           messages#update
+                     PUT    /messages/:id(.:format)                           messages#update
+                     DELETE /messages/:id(.:format)                           messages#destroy
+           websocket GET    /websocket(.:format)                              #<ActionCable::Server::Base:0x007f818cf4ded0 @mutex=#<Mutex:0x007f818cf4dea8>, @pubsub=nil, @channel_classes=nil, @worker_pool=nil, @stream_event_loop=nil, @remote_connections=nil>
+                root GET    /                                                 examples#index

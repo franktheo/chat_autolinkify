@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. http://www.lipsum.com/ questions? send it to alice@biba.com check out https://amazon.com/best-deals for the best deals"
+
+text1 = "http://google.com"
+@generic_URL_regexp = Regexp.new( '(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t<]*)', Regexp::MULTILINE | Regexp::IGNORECASE )
+@email_regexp = Regexp.new( '(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)', Regexp::IGNORECASE )
+
+def linkify( text )
+  @generic_URL_regexp = Regexp.new( '(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t<]*)', Regexp::MULTILINE | Regexp::IGNORECASE )
+  @email_regexp = Regexp.new( '(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)', Regexp::IGNORECASE )
+  s = text.to_s
+  s.gsub!( @generic_URL_regexp, ' <a href="\1\2">\1\2</a>')
+  s.gsub!( @email_regexp, ' <a href="mailto:\1\2%40\3">\1\2@\3</a>')
+  return s
+end
+
+#linkify(text1)
+
+
+require 'minitest/autorun'
+
+class Tests < MiniTest::Unit::TestCase
+
+  
+  def test_example_input
+
+    text1 = "http://google.com"
+    s= linkify(text1).to_s
+    
+    puts s
+    #assert_equal "<a href=“http://google.com”>http://google.com</a>" , linkify(text1).to_s
+    #assert_equal "<a href="http://google.com">http://google.com</a>" , s
+    #assert_match "<a href=“http://google.com”>http://google.com</a>" , s
+
+    assert_equal " <a href=\"http://google.com\">http://google.com</a>", s
+  end
+  
+  def test_example_input2
+
+    text1 = "alice@biba.com"
+    s= linkify(text1).to_s
+    
+    puts s
+    #assert_equal "<a href=“http://google.com”>http://google.com</a>" , linkify(text1).to_s
+    #assert_equal "<a href="http://google.com">http://google.com</a>" , s
+    #assert_match "<a href=“http://google.com”>http://google.com</a>" , s
+
+    assert_equal " <a href=\"mailto:alice%40biba.com\">alice@biba.com</a>", s
+  end
+
+
+  def test1
+
+    out = "Some info"
+    warn = "You did a bad thing"
+
+    assert_match %r%info%, out
+    assert_match %r%bad%, warn
+
+  end
+
+end
+
+
+#http://guides.rubyonrails.org/testing.html
+#http://ruby-doc.org/stdlib-2.0.0/libdoc/minitest/rdoc/MiniTest/Assertions.html
+
+#http://stackoverflow.com/questions/35726936/rails-4-assert-strings-in-activerecord-fixture-with-minitest
+#http://stackoverflow.com/questions/13850303/capybara-how-to-check-the-text-value-of-an-element-with-xpath-and-css
